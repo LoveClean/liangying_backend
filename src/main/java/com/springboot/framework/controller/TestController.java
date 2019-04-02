@@ -18,7 +18,7 @@ import java.util.List;
 public class TestController {
 
     @ACS(allowAnonymous = true)
-    @ApiOperation(value = "test", notes = "test")
+    @ApiOperation(value = "test", notes = "测试txt文件上传")
     @PostMapping(value = "test")
     public List<String> test(@RequestParam("file") MultipartFile file) throws Exception {
         // prefix 文件名 suffix 文件格式
