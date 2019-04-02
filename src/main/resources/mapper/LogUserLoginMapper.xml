@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.framework.dao.mapper.LogUserLoginMapper">
+  <resultMap id="BaseResultMap" type="com.springboot.framework.dao.entity.LogUserLogin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="remote_address" jdbcType="VARCHAR" property="remoteAddress" />
+    <result column="params_phone" jdbcType="CHAR" property="paramsPhone" />
+    <result column="request_params" jdbcType="VARCHAR" property="requestParams" />
+    <result column="response" jdbcType="VARCHAR" property="response" />
+    <result column="exception" jdbcType="VARCHAR" property="exception" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, remote_address, params_phone, request_params, response, exception, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_user_login
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from log_user_login
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.framework.dao.entity.LogUserLogin">
+    insert into log_user_login (id, remote_address, params_phone, 
+      request_params, response, exception, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{remoteAddress,jdbcType=VARCHAR}, #{paramsPhone,jdbcType=CHAR}, 
+      #{requestParams,jdbcType=VARCHAR}, #{response,jdbcType=VARCHAR}, #{exception,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.framework.dao.entity.LogUserLogin">
+    insert into log_user_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="remoteAddress != null">
+        remote_address,
+      </if>
+      <if test="paramsPhone != null">
+        params_phone,
+      </if>
+      <if test="requestParams != null">
+        request_params,
+      </if>
+      <if test="response != null">
+        response,
+      </if>
+      <if test="exception != null">
+        exception,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="remoteAddress != null">
+        #{remoteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsPhone != null">
+        #{paramsPhone,jdbcType=CHAR},
+      </if>
+      <if test="requestParams != null">
+        #{requestParams,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null">
+        #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        #{exception,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.framework.dao.entity.LogUserLogin">
+    update log_user_login
+    <set>
+      <if test="remoteAddress != null">
+        remote_address = #{remoteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsPhone != null">
+        params_phone = #{paramsPhone,jdbcType=CHAR},
+      </if>
+      <if test="requestParams != null">
+        request_params = #{requestParams,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null">
+        response = #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        exception = #{exception,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.framework.dao.entity.LogUserLogin">
+    update log_user_login
+    set remote_address = #{remoteAddress,jdbcType=VARCHAR},
+      params_phone = #{paramsPhone,jdbcType=CHAR},
+      request_params = #{requestParams,jdbcType=VARCHAR},
+      response = #{response,jdbcType=VARCHAR},
+      exception = #{exception,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

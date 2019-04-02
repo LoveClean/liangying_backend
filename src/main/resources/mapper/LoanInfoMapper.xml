@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.framework.dao.mapper.LoanInfoMapper">
+  <resultMap id="BaseResultMap" type="com.springboot.framework.dao.entity.LoanInfo">
+    <id column="loan_id" jdbcType="INTEGER" property="loanId" />
+    <result column="house_location" jdbcType="VARCHAR" property="houseLocation" />
+    <result column="house_master" jdbcType="TINYINT" property="houseMaster" />
+    <result column="house_time" jdbcType="VARCHAR" property="houseTime" />
+    <result column="house_monthly_amount" jdbcType="VARCHAR" property="houseMonthlyAmount" />
+    <result column="car_location" jdbcType="VARCHAR" property="carLocation" />
+    <result column="car_year" jdbcType="VARCHAR" property="carYear" />
+    <result column="car_monthly_amount" jdbcType="VARCHAR" property="carMonthlyAmount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.springboot.framework.dao.entity.LoanInfo">
+    <result column="house_file" jdbcType="LONGVARCHAR" property="houseFile" />
+    <result column="car_file" jdbcType="LONGVARCHAR" property="carFile" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    loan_id, house_location, house_master, house_time, house_monthly_amount, car_location, 
+    car_year, car_monthly_amount
+  </sql>
+  <sql id="Blob_Column_List">
+    house_file, car_file
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_loan_info
+    where loan_id = #{loanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_loan_info
+    where loan_id = #{loanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.framework.dao.entity.LoanInfo">
+    insert into tb_loan_info (loan_id, house_location, house_master, 
+      house_time, house_monthly_amount, car_location, 
+      car_year, car_monthly_amount, house_file,
+      car_file)
+    values (#{loanId,jdbcType=INTEGER}, #{houseLocation,jdbcType=VARCHAR}, #{houseMaster,jdbcType=TINYINT}, 
+      #{houseTime,jdbcType=VARCHAR}, #{houseMonthlyAmount,jdbcType=VARCHAR}, #{carLocation,jdbcType=VARCHAR}, 
+      #{carYear,jdbcType=VARCHAR}, #{carMonthlyAmount,jdbcType=VARCHAR}, #{houseFile,jdbcType=LONGVARCHAR}, 
+      #{carFile,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.framework.dao.entity.LoanInfo">
+    insert into tb_loan_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loanId != null">
+        loan_id,
+      </if>
+      <if test="houseLocation != null">
+        house_location,
+      </if>
+      <if test="houseMaster != null">
+        house_master,
+      </if>
+      <if test="houseTime != null">
+        house_time,
+      </if>
+      <if test="houseMonthlyAmount != null">
+        house_monthly_amount,
+      </if>
+      <if test="carLocation != null">
+        car_location,
+      </if>
+      <if test="carYear != null">
+        car_year,
+      </if>
+      <if test="carMonthlyAmount != null">
+        car_monthly_amount,
+      </if>
+      <if test="houseFile != null">
+        house_file,
+      </if>
+      <if test="carFile != null">
+        car_file,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loanId != null">
+        #{loanId,jdbcType=INTEGER},
+      </if>
+      <if test="houseLocation != null">
+        #{houseLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="houseMaster != null">
+        #{houseMaster,jdbcType=TINYINT},
+      </if>
+      <if test="houseTime != null">
+        #{houseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="houseMonthlyAmount != null">
+        #{houseMonthlyAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="carLocation != null">
+        #{carLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="carYear != null">
+        #{carYear,jdbcType=VARCHAR},
+      </if>
+      <if test="carMonthlyAmount != null">
+        #{carMonthlyAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="houseFile != null">
+        #{houseFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="carFile != null">
+        #{carFile,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.framework.dao.entity.LoanInfo">
+    update tb_loan_info
+    <set>
+      <if test="houseLocation != null">
+        house_location = #{houseLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="houseMaster != null">
+        house_master = #{houseMaster,jdbcType=TINYINT},
+      </if>
+      <if test="houseTime != null">
+        house_time = #{houseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="houseMonthlyAmount != null">
+        house_monthly_amount = #{houseMonthlyAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="carLocation != null">
+        car_location = #{carLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="carYear != null">
+        car_year = #{carYear,jdbcType=VARCHAR},
+      </if>
+      <if test="carMonthlyAmount != null">
+        car_monthly_amount = #{carMonthlyAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="houseFile != null">
+        house_file = #{houseFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="carFile != null">
+        car_file = #{carFile,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where loan_id = #{loanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.springboot.framework.dao.entity.LoanInfo">
+    update tb_loan_info
+    set house_location = #{houseLocation,jdbcType=VARCHAR},
+      house_master = #{houseMaster,jdbcType=TINYINT},
+      house_time = #{houseTime,jdbcType=VARCHAR},
+      house_monthly_amount = #{houseMonthlyAmount,jdbcType=VARCHAR},
+      car_location = #{carLocation,jdbcType=VARCHAR},
+      car_year = #{carYear,jdbcType=VARCHAR},
+      car_monthly_amount = #{carMonthlyAmount,jdbcType=VARCHAR},
+      house_file = #{houseFile,jdbcType=LONGVARCHAR},
+      car_file = #{carFile,jdbcType=LONGVARCHAR}
+    where loan_id = #{loanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.framework.dao.entity.LoanInfo">
+    update tb_loan_info
+    set house_location = #{houseLocation,jdbcType=VARCHAR},
+      house_master = #{houseMaster,jdbcType=TINYINT},
+      house_time = #{houseTime,jdbcType=VARCHAR},
+      house_monthly_amount = #{houseMonthlyAmount,jdbcType=VARCHAR},
+      car_location = #{carLocation,jdbcType=VARCHAR},
+      car_year = #{carYear,jdbcType=VARCHAR},
+      car_monthly_amount = #{carMonthlyAmount,jdbcType=VARCHAR}
+    where loan_id = #{loanId,jdbcType=INTEGER}
+  </update>
+</mapper>

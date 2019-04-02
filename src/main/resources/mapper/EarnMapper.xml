@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.framework.dao.mapper.EarnMapper">
+  <resultMap id="BaseResultMap" type="com.springboot.framework.dao.entity.Earn">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="superior_id" jdbcType="VARCHAR" property="superiorId" />
+    <result column="subordinate_id" jdbcType="VARCHAR" property="subordinateId" />
+    <result column="subordinate_phone" jdbcType="CHAR" property="subordinatePhone" />
+    <result column="earn_money" jdbcType="DECIMAL" property="earnMoney" />
+    <result column="loan_money" jdbcType="DECIMAL" property="loanMoney" />
+    <result column="percentage" jdbcType="DECIMAL" property="percentage" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, superior_id, subordinate_id, subordinate_phone, earn_money, loan_money, percentage, 
+    create_by, create_date, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_earn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_earn
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.framework.dao.entity.Earn">
+    insert into tb_earn (id, superior_id, subordinate_id, 
+      subordinate_phone, earn_money, loan_money, 
+      percentage, create_by, create_date, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{superiorId,jdbcType=VARCHAR}, #{subordinateId,jdbcType=VARCHAR}, 
+      #{subordinatePhone,jdbcType=CHAR}, #{earnMoney,jdbcType=DECIMAL}, #{loanMoney,jdbcType=DECIMAL}, 
+      #{percentage,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.framework.dao.entity.Earn">
+    insert into tb_earn
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="superiorId != null">
+        superior_id,
+      </if>
+      <if test="subordinateId != null">
+        subordinate_id,
+      </if>
+      <if test="subordinatePhone != null">
+        subordinate_phone,
+      </if>
+      <if test="earnMoney != null">
+        earn_money,
+      </if>
+      <if test="loanMoney != null">
+        loan_money,
+      </if>
+      <if test="percentage != null">
+        percentage,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="superiorId != null">
+        #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateId != null">
+        #{subordinateId,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinatePhone != null">
+        #{subordinatePhone,jdbcType=CHAR},
+      </if>
+      <if test="earnMoney != null">
+        #{earnMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="loanMoney != null">
+        #{loanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="percentage != null">
+        #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.framework.dao.entity.Earn">
+    update tb_earn
+    <set>
+      <if test="superiorId != null">
+        superior_id = #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateId != null">
+        subordinate_id = #{subordinateId,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinatePhone != null">
+        subordinate_phone = #{subordinatePhone,jdbcType=CHAR},
+      </if>
+      <if test="earnMoney != null">
+        earn_money = #{earnMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="loanMoney != null">
+        loan_money = #{loanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="percentage != null">
+        percentage = #{percentage,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.framework.dao.entity.Earn">
+    update tb_earn
+    set superior_id = #{superiorId,jdbcType=VARCHAR},
+      subordinate_id = #{subordinateId,jdbcType=VARCHAR},
+      subordinate_phone = #{subordinatePhone,jdbcType=CHAR},
+      earn_money = #{earnMoney,jdbcType=DECIMAL},
+      loan_money = #{loanMoney,jdbcType=DECIMAL},
+      percentage = #{percentage,jdbcType=DECIMAL},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
