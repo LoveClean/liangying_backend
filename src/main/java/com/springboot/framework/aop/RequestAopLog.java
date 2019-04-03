@@ -45,7 +45,7 @@ public class RequestAopLog {
    * <pre>
    * 请求日志
    * </pre>
-   * 
+   *
    * @param request
    */
   private void requestLog(HttpServletRequest request) {
@@ -86,7 +86,7 @@ public class RequestAopLog {
    * <pre>
    * 重新构造请求的参数值
    * </pre>
-   * 
+   *
    * @param value
    * @return
    */
@@ -121,7 +121,7 @@ public class RequestAopLog {
    * <pre>
    * 响应Log
    * </pre>
-   * 
+   *
    * @param joinPoint
    * @throws Throwable
    */
@@ -144,7 +144,7 @@ public class RequestAopLog {
    * <pre>
    * 获取换行符
    * </pre>
-   * 
+   *
    * @return
    */
   private String getNewLine() {
