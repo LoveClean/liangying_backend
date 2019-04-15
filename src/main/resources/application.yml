@@ -30,6 +30,9 @@ img:
   height: 2000
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   main:
     banner-mode: console
   http:
@@ -39,7 +42,7 @@ spring:
       force: true
   datasource:
     name: datasource
-    url: jdbc:mysql://122.112.225.34:3306/liangying?serverTimezone=UTC
+    url: jdbc:mysql://122.112.225.34:3306/liangying?serverTimezone=GMT%2b8
     username: root
     password: "!Q1q1q1q"
     type: com.alibaba.druid.pool.DruidDataSource
