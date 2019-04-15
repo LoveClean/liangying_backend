@@ -4,20 +4,18 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.springboot.framework.controller.response.PageResponseBean;
-import com.springboot.framework.dao.entity.Loan;
-import com.springboot.framework.dao.entity.LoanInfo;
-import com.springboot.framework.dao.entity.User;
-import com.springboot.framework.dao.mapper.LoanInfoMapper;
-import com.springboot.framework.dao.mapper.LoanMapper;
-import com.springboot.framework.dao.mapper.UserMapper;
+import com.springboot.framework.dao.entity.*;
+import com.springboot.framework.dao.mapper.*;
 import com.springboot.framework.service.LoanService;
 import com.springboot.framework.util.ResponseEntity;
 import com.springboot.framework.util.ResponseEntityUtil;
+import com.springboot.framework.util.StringUtil;
 import com.springboot.framework.vo.LoanListVO;
 import com.springboot.framework.vo.LoanVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -28,6 +26,10 @@ public class LoanServiceImpl implements LoanService {
     private LoanInfoMapper loanInfoMapper;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private EarnMapper earnMapper;
+    @Resource
+    private SysParameterMapper sysParameterMapper;
 
     @Override
     public ResponseEntity<Integer> deleteByPrimaryKey(Integer id, String updateBy) {
@@ -100,10 +102,19 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public ResponseEntity<Integer> updateByStatus(Integer id, Byte status, String updateBy) {
-        Loan record = new Loan();
-        record.setId(id);
-        record.setStatus(status);
-        record.setUpdateBy(updateBy);
-        return ResponseEntityUtil.success(loanMapper.updateByPrimaryKeySelective(record));
+        Loan loan = loanMapper.selectByPrimaryKey(id);
+        loan.setStatus(status);
+        loan.setUpdateBy(updateBy);
+        User user = userMapper.selectByPrimaryKey(loan.getUserId());
+        String superiorId = user.getUserId();
+        if (!StringUtil.isEmpty(superiorId)) {
+            SysParameter sysParameter = sysParameterMapper.selectByPrimaryKey(1);
+            BigDecimal loanMoney = loan.getMoney();
+            BigDecimal percentage = new BigDecimal(sysParameter.getValue());
+            BigDecimal earnMoney = percentage.multiply(loanMoney).setScale(2, BigDecimal.ROUND_FLOOR);
+            Earn earn = new Earn(superiorId, loan.getUserId(), user.getPhone(), earnMoney, loanMoney, percentage, updateBy);
+            earnMapper.insertSelective(earn);
+        }
+        return ResponseEntityUtil.success(loanMapper.updateByPrimaryKeySelective(loan));
     }
 }

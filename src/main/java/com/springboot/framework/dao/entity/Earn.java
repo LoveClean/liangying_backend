@@ -24,6 +24,19 @@ public class Earn {
 
     private Byte status;
 
+    public Earn() {
+    }
+
+    public Earn(String superiorId, String subordinateId, String subordinatePhone, BigDecimal earnMoney, BigDecimal loanMoney, BigDecimal percentage, String createBy) {
+        this.superiorId = superiorId;
+        this.subordinateId = subordinateId;
+        this.subordinatePhone = subordinatePhone;
+        this.earnMoney = earnMoney;
+        this.loanMoney = loanMoney;
+        this.percentage = percentage;
+        this.createBy = createBy;
+    }
+
     public Integer getId() {
         return id;
     }

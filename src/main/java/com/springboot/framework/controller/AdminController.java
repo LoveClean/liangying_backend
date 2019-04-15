@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/admin/")
 public class AdminController extends BaseController {
-    @Autowired
+    @Resource
     private AdminService adminService;
     @Resource
     private RedisService redisService;

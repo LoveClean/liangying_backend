@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @Api(description = "公共接口", produces = "application/json")
 @RestController
 @RequestMapping("/public/")
 public class PublicController {
-    @Autowired
+    @Resource
     private AdminService adminService;
-    @Autowired
+    @Resource
     private InformationService informationService;
-    @Autowired
+    @Resource
     private LoanService loanService;
-    @Autowired
+    @Resource
     private UserService userService;
-    @Autowired
+    @Resource
     private WithdrawalService withdrawalService;
-    @Autowired
+    @Resource
     private SlideshowService slideshowService;
 
     @ApiOperation(value = "查看管理员总数", notes = "查看管理员总数")

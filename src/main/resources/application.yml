@@ -48,7 +48,7 @@ spring:
     database: 0
     port: 6379
     host: localhost
-    #   host: 198.19.56.204
+#    host: 198.19.56.204
     password:
     timeout: 1h
 
