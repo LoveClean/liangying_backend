@@ -114,6 +114,10 @@ public class LoanServiceImpl implements LoanService {
             BigDecimal earnMoney = percentage.multiply(loanMoney).setScale(2, BigDecimal.ROUND_FLOOR);
             Earn earn = new Earn(superiorId, loan.getUserId(), user.getPhone(), earnMoney, loanMoney, percentage, updateBy);
             earnMapper.insertSelective(earn);
+            User superior = userMapper.selectByPrimaryKey(superiorId);
+            superior.setBalance(superior.getBalance().add(earnMoney));
+            superior.setEarn(superior.getEarn().add(earnMoney));
+            userMapper.updateByPrimaryKeySelective(superior);
         }
         return ResponseEntityUtil.success(loanMapper.updateByPrimaryKeySelective(loan));
     }

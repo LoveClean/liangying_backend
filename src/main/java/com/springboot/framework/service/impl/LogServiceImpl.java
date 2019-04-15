@@ -29,6 +29,8 @@ public class LogServiceImpl implements LogService {
     private LogUserSmsMapper logUserSmsMapper;
     @Resource
     private LogUserUpdateMapper logUserUpdateMapper;
+    @Resource
+    private EarnMapper earnMapper;
 
     @Override
     public ResponseEntity<Integer> insertSelective(LogAdmin record) {
@@ -99,6 +101,19 @@ public class LogServiceImpl implements LogService {
         pageInfo.setList(logList);
 
         PageResponseBean page = new PageResponseBean<LogUserUpdate>(pageInfo);
+        page.setCode(0);
+        page.setHttpStatus(200);
+        return page;
+    }
+
+    @Override
+    public PageResponseBean selectListForEarn(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Earn> logList = earnMapper.selectList();
+        PageInfo pageInfo = new PageInfo(logList);
+        pageInfo.setList(logList);
+
+        PageResponseBean page = new PageResponseBean<Earn>(pageInfo);
         page.setCode(0);
         page.setHttpStatus(200);
         return page;

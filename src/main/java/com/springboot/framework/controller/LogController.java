@@ -46,4 +46,10 @@ public class LogController extends BaseController {
     public PageResponseBean selectListForLogUserUpdate(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         return logService.selectListForLogUserUpdate(pageNum, pageSize);
     }
+
+    @ApiOperation(value = "用户收益流水", notes = "用户收益流水")
+    @GetMapping(value = "selectListForEarn")
+    public PageResponseBean selectListForEarn(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        return logService.selectListForEarn(pageNum, pageSize);
+    }
 }

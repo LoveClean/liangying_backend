@@ -16,4 +16,6 @@ public interface LogService {
     PageResponseBean selectListForLogUserSms(Integer pageNum, Integer pageSize);
 
     PageResponseBean selectListForLogUserUpdate(Integer pageNum, Integer pageSize);
+
+    PageResponseBean selectListForEarn(Integer pageNum, Integer pageSize);
 }
